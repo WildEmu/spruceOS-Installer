@@ -49,9 +49,11 @@ fn launch_with_pkexec(exe_path: &Path) -> Result<(), String> {
         cmd.arg(format!("XAUTHORITY={}/.Xauthority", home));
     }
 
-    // Pass Wayland variables if present
-    if let Ok(wayland) = std::env::var("WAYLAND_DISPLAY") {
-        cmd.arg(format!("WAYLAND_DISPLAY={}", wayland));
+    // Prefer XWayland when available: winit ignores the window icon on native Wayland
+    if std::env::var_os("DISPLAY").is_none() {
+        if let Ok(wayland) = std::env::var("WAYLAND_DISPLAY") {
+            cmd.arg(format!("WAYLAND_DISPLAY={}", wayland));
+        }
     }
     if let Ok(xdg_runtime) = std::env::var("XDG_RUNTIME_DIR") {
         cmd.arg(format!("XDG_RUNTIME_DIR={}", xdg_runtime));

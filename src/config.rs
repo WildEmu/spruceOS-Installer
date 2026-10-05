@@ -446,7 +446,7 @@ pub const WINDOW_MIN_SIZE: (f32, f32) = (679.5, 420.0);
 /// Embedded window icon (PNG format)
 /// Change this path to use a different icon file
 #[cfg(feature = "icon")]
-pub const APP_ICON_PNG: &[u8] = include_bytes!("../assets/Icons/icon.png");
+pub const APP_ICON_PNG: &[u8] = include_bytes!("../assets/Icons/icon_dark.png");
 
 /// Load the application icon for the window
 /// Returns None if no icon is configured or if loading fails
